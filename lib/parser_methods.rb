@@ -75,8 +75,7 @@ module ActsAsSolr #:nodoc:
         query_options[:query] = replace_types([query])[0] # TODO adjust replace_types to work with String or Array  
 
         if options[:order]
-          # TODO: set the sort parameter instead of the old ;order. style.
-          query_options[:query] << ';' << replace_types([order], false)[0]
+          query_options[:sort] = replace_types([order], false)[0]
         end
         
         ActsAsSolr::Post.execute(Solr::Request::Standard.new(query_options))
